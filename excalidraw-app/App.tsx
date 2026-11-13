@@ -101,6 +101,7 @@ import Collab, {
 } from "./collab/Collab";
 import { AppFooter } from "./components/AppFooter";
 import { AppMainMenu } from "./components/AppMainMenu";
+import { CanvasSnapshots } from "./components/CanvasSnapshots";
 import { AppWelcomeScreen } from "./components/AppWelcomeScreen";
 import {
   ExportToExcalidrawPlus,
@@ -451,6 +452,7 @@ const ExcalidrawWrapper = () => {
   });
 
   const [, forceRefresh] = useState(false);
+  const [areSnapshotsOpen, setAreSnapshotsOpen] = useState(false);
 
   useEffect(() => {
     if (isDevEnv()) {
@@ -1041,6 +1043,11 @@ const ExcalidrawWrapper = () => {
           isCollabEnabled={isCollabAvailable}
           theme={appTheme}
           refresh={() => forceRefresh((prev) => !prev)}
+          onSnapshotsOpen={() => setAreSnapshotsOpen(true)}
+        />
+        <CanvasSnapshots
+          isOpen={areSnapshotsOpen}
+          onClose={() => setAreSnapshotsOpen(false)}
         />
         <AppWelcomeScreen
           onCollabDialogOpen={onCollabDialogOpen}
